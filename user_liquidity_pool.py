@@ -14,16 +14,9 @@ class UserLiquidityPool:
 		self._initial_token_b = initial_b
 		self._initial_amm = self.get_amm(initial_a, initial_b)
 
-	def get_liquidity_without_pool_rewards(self, token_a_to_b_course: dict):
-		token_a_to_b_course_str = self._initial_token_a.title + '/' + self._initial_token_b.title
-		a_to_b_course: float | None = token_a_to_b_course.get(token_a_to_b_course_str, None)
-		if not a_to_b_course:
-			raise f'Нет передан курс {token_a_to_b_course_str} токенов.'
-
-		b_to_a_course = 1 / a_to_b_course
-
-		b_token_amount = (self.initial_amm * b_to_a_course) ** .5
-		a_token_amount = b_token_amount * a_to_b_course
+	def get_liquidity_without_pool_rewards(self, token_a_to_b_course: float, token_b_to_a_course: float):
+		b_token_amount = (self.initial_amm * token_b_to_a_course) ** .5
+		a_token_amount = b_token_amount * token_a_to_b_course
 
 		a = Token(self._initial_token_a.title, a_token_amount)
 		b = Token(self._initial_token_b.title, b_token_amount)
