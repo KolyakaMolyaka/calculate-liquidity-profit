@@ -26,7 +26,6 @@ if __name__ == '__main__':
 	print(initial_a)
 	print(initial_b)
 
-
 	liquidity = UserLiquidityPool(initial_a, initial_b)
 
 	delim()
@@ -40,13 +39,13 @@ if __name__ == '__main__':
 	token_a_to_b_course = current_a.amount / current_b.amount
 	token_b_to_a_course = current_b.amount / current_a.amount
 
-	a_without_rewards, b_without_rewards = liquidity.get_liquidity_without_pool_rewards(token_a_to_b_course, token_b_to_a_course)
+	a_without_rewards, b_without_rewards = liquidity.get_liquidity_without_pool_rewards(token_a_to_b_course,
+																						token_b_to_a_course)
 
 	delim()
 	print('Tokens liquidity without pool rewards')
 	print(a_without_rewards)
 	print(b_without_rewards)
-
 
 	profit_a, profit_b = UserLiquidityPool.calculate_profit(current_a, current_b, a_without_rewards, b_without_rewards)
 	delim()
@@ -61,3 +60,6 @@ if __name__ == '__main__':
 	delim()
 	print(f'Percentage profit from pool A: {profit_a_percentage}')
 	print(f'Percentage profit from pool B: {profit_b_percentage}')
+
+	delim()
+	input('Enter to exit...')
